@@ -1,0 +1,10 @@
+{
+  "errors": [
+    { "code": 1, "description": "E01 – Ateşleme başarısız" },
+    { "code": 2, "description": "E02 – Alev kaybı" },
+    { "code": 5, "description": "E05 – Fan arızası" },
+    { "code": 6, "description": "E06 – Sıcaklık sensörü arızası" },
+    { "code": 16, "description": "E10 – Su basıncı düşük" },
+    { "code": 65535, "description": "Bilinmeyen arıza kodu" }
+  ]
+}
