@@ -1,0 +1,12 @@
+(export (version D)
+  (components
+    (comp (ref U1) (value ESP32-DEV) (footprint Module:ESP32-DevKitC))
+    (comp (ref OLED1) (value SSD1306) (footprint Display:OLED-128x64-I2C))
+  )
+  (nets
+    (net (code 1) (name "GND") (node (ref U1) (pin 4)) (node (ref OLED1) (pin 4)))
+    (net (code 2) (name "3V3") (node (ref U1) (pin 5)) (node (ref OLED1) (pin 2)))
+    (net (code 3) (name "I2C_SDA") (node (ref U1) (pin 2)) (node (ref OLED1) (pin 3)))
+    (net (code 4) (name "I2C_SCL") (node (ref U1) (pin 3)) (node (ref OLED1) (pin 1)))
+  )
+)

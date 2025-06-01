@@ -1,0 +1,16 @@
+(kicad_pcb (version 20211014) (host pcbnew)
+  (general
+    (thickness 1.6)
+    (drawings 5)
+    (tracks 0)
+    (zones 0)
+    (modules 0)
+  )
+  (page A3)
+  (title_block
+    (title "ESP32 Kombi Test Cihazı")
+    (date "2025-06-01")
+    (rev "A")
+    (company "monopur")
+  )
+)
