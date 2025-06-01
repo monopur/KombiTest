@@ -1,89 +1,53 @@
-# ESP32 Kombi Kart Test ve Simülasyon Sistemi
+# KombiTest: Akıllı Diagnostik ve Otomatik Güncelleme Sistemi
 
-Bu proje, farklı marka ve model (yoğuşmalı / yoğuşmasız) kombi elektronik kartlarının giriş/çıkışlarını test etmek ve simüle etmek için geliştirilmiştir.  
-Tüm giriş/çıkış/parametreler dinamik model dosyası (JSON/XML) ile yönetilir.  
-Web arayüzünden canlı izleme, test başlatma ve model düzenleme mümkündür.
+## Özellikler
+- **Tek RX/TX ile çoklu marka (Vaillant, Demirdöküm, E.C.A.) hata okuma ve reset**
+- **Donanım sürümüne uygun firmware güncellemesi** (repo'dan otomatik kontrol, kullanıcı onaylı)
+- **Model dosyası eksikse otomatik senkronizasyon**
+- **Kullanıcıya web arayüzüyle güncelleme ve test/reset menüsü**
+- **Güncelleme tercihi menüden yönetilebilir**
+- **Tüm dosya yapısı ve API'ler sade, entegre ve anlaşılır**
 
----
-
-## Derleyici ve Uyumluluk
-
-- **PlatformIO (VSCode ile):** Tam uyumlu, önerilir.
-- **Arduino IDE:** Tam uyumlu.
-- **Espressif ESP-IDF:** Küçük değişikliklerle uyarlanabilir.
-
-### Tavsiye edilen sürümler:
-- **ESP32 Arduino Core:** >= 2.0.5
-- **PlatformIO platform-espressif32:** >= 6.1.0
-- **Kicad:** >= 6.0
-
-## Bağımlı Kütüphaneler
-
-- ArduinoJson (>= 6.x)
-- TinyXML2 (>= 9.x)
-- ESPAsyncWebServer
-- SPIFFS veya LittleFS (ESP32 dosya sistemi)
-- Donanım: Wire, SPI, ledc (PWM), vs.
-
----
-
-## Klasör ve Dosya Yapısı
-
-```
-proje_kok_dizini/
-├── README.md
-├── platformio.ini
-├── src/
-│   ├── main.cpp
-│   ├── settings/
-│   │   ├── model_settings.h
-│   │   └── model_settings.cpp
-│   ├── hardware/
-│   │   ├── pinmap_dynamic.h
-│   │   ├── fan_pwm_driver.cpp
-│   │   ├── gas_valve_driver.cpp
-│   │   └── ntc_sim_driver.cpp
-│   └── app/
-│       ├── hardware_manager.cpp
-│       └── test_engine.cpp
-├── data/
-│   ├── model_editor.html
-│   └── live_monitor.html
-├── models/
-│   ├── demirdokum_neo_2023.xml / .json
-│   ├── bosch_condense_2024.xml / .json
-│   ├── eca_proteus_2022.xml / .json
-│   ├── baymak_duotec_2021.xml / .json
-│   ├── vaillant_ecotecplus_2024.xml / .json
-│   ├── daikin_premix_2024.xml / .json
-│   ├── ... (tüm diğer marka/model xml+json dosyaları)
-│   └── örnek_klasik_yoğuşmasız.xml / .json
-├── hardware/
-│   ├── hardware_guide.md
-│   └── esp32_kombi.csv
-├── kicad/
-│   ├── esp32_kombi.pro
-│   ├── esp32_kombi.sch
-│   ├── esp32_kombi.kicad_pcb
-│   ├── esp32_kombi.lib
-│   ├── esp32_kombi-footprints.pretty/
-│   │   └── .keep
-│   └── esp32_kombi.net
-└── README_KICAD.md
+## Dizin Yapısı
+```text
+src/
+  main.cpp
+  hardware/
+    diagnostic_driver.cpp
+    error_tables.h
+    pinmap_dynamic.h
+  settings/
+    hw_version.h
+    update_settings.h
+    update_settings.cpp
+  app/
+    update_manager.cpp
+    diagnostic_api.cpp
+models/
+  vaillant_ecotecplus_2024.xml
+  demirdokum_neo_2023.xml
+  eca_proteus_2022.xml
+guncelle/
+  firmware_version_1.2.0.json
+  firmware_version_1.1.0.json
+  firmware_version_1.0.0.json
+  release_notes_1.2.0.txt
+data/
+  diagnostic_menu.html
+  update_menu.html
 ```
 
----
+## Kurulum & Kullanım
+1. Donanım sürümünüzü `src/settings/hw_version.h` ile tanımlayın.
+2. Yazılımı ESP32'ye yükleyin.
+3. Cihaz açılışında otomatik olarak güncelleme kontrolü ve model dosyası senkronizasyonu yapılır.
+4. Web arayüzünden test/reset ve güncelleme işlemlerini yönetebilirsiniz.
 
-## Kurulum ve Kullanım
+## Güncelleme Sistemi
+- Her firmware için bir JSON dosyası `guncelle/` altında tutulur.
+- `"hw_compat"` ile donanım uyumluluğu sağlanır.
+- Cihaz, sadece kendi donanımına uygun en yeni sürümü önerir.
+- Model dosyaları `models/` altında tutulur; eksikse cihaz otomatik indirir.
 
-1. **Kütüphaneleri yükleyin** (Arduino IDE Library Manager veya PlatformIO ile).
-2. Dosya ve klasörleri yukarıdaki yapıya göre düzenleyin.
-3. Web arayüzü dosyalarını (`data/`) SPIFFS/LittleFS ile ESP32'ye yükleyin.
-4. Model dosyalarını (`models/`) web arayüzüyle veya doğrudan SPIFFS/LittleFS ile cihaza aktarın.
-5. PlatformIO veya Arduino IDE ile derleyip yükleyin.
-
----
-
-Daha fazla bilgi için:
-- [Donanım bağlantı rehberi → hardware/hardware_guide.md](hardware/hardware_guide.md)
-- [Kicad proje ve PCB açıklaması → README_KICAD.md](README_KICAD.md)
+## Lisans
+MIT
