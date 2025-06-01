@@ -1,5 +1,5 @@
 <model>
-  <name>ECA_Proteus_2022</name>
+  <name>Demirdokum_Neo_2023</name>
   <inputs>
     <input id="diag_rx" type="bus" label="Diagnostik RX"/>
     <input id="diag_tx" type="bus" label="Diagnostik TX"/>
