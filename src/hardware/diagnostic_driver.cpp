@@ -6,7 +6,7 @@
 HardwareSerial DiagSerial(1);
 #define DIAG_BAUD 9600
 
-enum DiagBrand { BRAND_VAILLANT, BRAND_DEMIRDOKUM, BRAND_ECA };
+enum DiagBrand { BRAND_VAILLANT, BRAND_DEMIRDOKUM, BRAND_ECA, BRAND_BOSCH };
 
 void diag_init() {
     DiagSerial.begin(DIAG_BAUD, SERIAL_8N1, modelPinMapping["diag_rx"], modelPinMapping["diag_tx"]);
@@ -22,9 +22,10 @@ String diag_read_errors_json(DiagBrand brand) {
             JsonObject err = arr.createNestedObject();
             err["code"] = String(code, HEX);
             switch (brand) {
-                case BRAND_VAILLANT:   err["desc"] = error_description(vaillant_error_table, code); break;
-                case BRAND_DEMIRDOKUM: err["desc"] = error_description(demirdokum_error_table, code); break;
-                case BRAND_ECA:        err["desc"] = error_description(eca_error_table, code); break;
+                case BRAND_VAILLANT:   err["desc"] = vaillantTable.description(code); break;
+                case BRAND_DEMIRDOKUM: err["desc"] = demirdokumTable.description(code); break;
+                case BRAND_ECA:        err["desc"] = ecaTable.description(code); break;
+                case BRAND_BOSCH:      err["desc"] = boschTable.description(code); break;
             }
         }
     }
@@ -32,8 +33,8 @@ String diag_read_errors_json(DiagBrand brand) {
     return out;
 }
 
-// Reset komutu (örnek frame, protokole göre güncellenebilir)
-void diag_reset_error(DiagBrand) {
-    uint8_t reset_cmd[] = {0xAA, 0x00, 0x10, 0x05, 0x01, 0x00, 0x01, 0x0D};
+void diag_reset_error(DiagBrand brand) {
+    uint8_t reset_cmd[8] = {0xAA, 0x00, 0x10, 0x05, 0x01, 0x00, 0x01, 0x0D}; // örnek frame
+    // Bosch protokolü farklıysa burada ayrıştırabilirsin
     DiagSerial.write(reset_cmd, sizeof(reset_cmd));
 }
