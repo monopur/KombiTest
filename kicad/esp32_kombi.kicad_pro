@@ -1,0 +1,10 @@
+{
+    "version": 1,
+    "generator": "kicad",
+    "project": {
+        "name": "KombiTest",
+        "description": "KombiTest donanım projesi. Markalar: Vaillant, Demirdöküm, E.C.A., Bosch (v1.2.0 ile Bosch desteği eklendi).\nTüm markalar tek RX/TX üzerinden test edilebilir.",
+        "paths": {},
+        "files": []
+    }
+}
