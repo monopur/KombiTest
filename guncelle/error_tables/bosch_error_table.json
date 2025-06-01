@@ -1,0 +1,9 @@
+{
+  "errors": [
+    { "code": 0xA1, "description": "A1 – Düşük su basıncı" },
+    { "code": 0xA2, "description": "A2 – Ateşleme başarısız" },
+    { "code": 0xA3, "description": "A3 – Aşırı ısınma" },
+    { "code": 0xA4, "description": "A4 – Fan arızası" },
+    { "code": 0xFFFF, "description": "Bilinmeyen arıza kodu" }
+  ]
+}
