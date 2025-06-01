@@ -1,53 +1,22 @@
-# KombiTest: Akıllı Diagnostik ve Otomatik Güncelleme Sistemi
+# KombiTest: Bosch Desteği ve Dinamik Hata Tablosu Güncellemesi
 
-## Özellikler
-- **Tek RX/TX ile çoklu marka (Vaillant, Demirdöküm, E.C.A.) hata okuma ve reset**
-- **Donanım sürümüne uygun firmware güncellemesi** (repo'dan otomatik kontrol, kullanıcı onaylı)
-- **Model dosyası eksikse otomatik senkronizasyon**
-- **Kullanıcıya web arayüzüyle güncelleme ve test/reset menüsü**
-- **Güncelleme tercihi menüden yönetilebilir**
-- **Tüm dosya yapısı ve API'ler sade, entegre ve anlaşılır**
+## Yeni Özellikler
+- Bosch marka kombi desteği (test, reset, hata kodu okuma)
+- Tüm hata tabloları (Bosch dahil) dinamik olarak repo'dan otomatik güncellenir
+- Bosch için örnek model dosyası ve güncellenmiş hata tablosu JSON'u
+- Web menü ve API'de Bosch marka desteği
+- Kicad donanım projesi: Bosch için ayrı RX/TX gerekmez, ortak hatta devam
 
-## Dizin Yapısı
-```text
-src/
-  main.cpp
-  hardware/
-    diagnostic_driver.cpp
-    error_tables.h
-    pinmap_dynamic.h
-  settings/
-    hw_version.h
-    update_settings.h
-    update_settings.cpp
-  app/
-    update_manager.cpp
-    diagnostic_api.cpp
-models/
-  vaillant_ecotecplus_2024.xml
-  demirdokum_neo_2023.xml
-  eca_proteus_2022.xml
-guncelle/
-  firmware_version_1.2.0.json
-  firmware_version_1.1.0.json
-  firmware_version_1.0.0.json
-  release_notes_1.2.0.txt
-data/
-  diagnostic_menu.html
-  update_menu.html
-```
+## Kicad Proje Notu
+Tüm markalar (Vaillant, Demirdöküm, E.C.A., Bosch) için RX/TX hatları ortaktır.
+Eğer Bosch'a özel bir hat eklenirse, şema ve PCB dosyalarına "BOSCH_RX" ve "BOSCH_TX" olarak ekleyin ve açıklamada belirtin.
 
-## Kurulum & Kullanım
-1. Donanım sürümünüzü `src/settings/hw_version.h` ile tanımlayın.
-2. Yazılımı ESP32'ye yükleyin.
-3. Cihaz açılışında otomatik olarak güncelleme kontrolü ve model dosyası senkronizasyonu yapılır.
-4. Web arayüzünden test/reset ve güncelleme işlemlerini yönetebilirsiniz.
+## /guncelle/error_tables/ altında tutulması gereken güncel hata tablosu JSON dosyaları:
+- vaillant_error_table.json
+- demirdokum_error_table.json
+- eca_error_table.json
+- bosch_error_table.json
 
-## Güncelleme Sistemi
-- Her firmware için bir JSON dosyası `guncelle/` altında tutulur.
-- `"hw_compat"` ile donanım uyumluluğu sağlanır.
-- Cihaz, sadece kendi donanımına uygun en yeni sürümü önerir.
-- Model dosyaları `models/` altında tutulur; eksikse cihaz otomatik indirir.
+## Web arayüzünde Bosch seçimi ve test/reset mümkündür.
 
-## Lisans
-MIT
+## Firmware, model ve hata tablosu güncellemeleri repo'dan otomatik çekilir.
