@@ -14,20 +14,18 @@ void setup() {
     SPIFFS.begin(true);
     updateSettings.load();
 
-    // WiFi bağlantısı gibi diğer başlatmalar buraya...
-
     // Güncelleme kontrolü
     if (updateSettings.auto_update) {
         bool fw_update = check_firmware_update();
         bool models_update = check_and_update_models();
+        bool tables_update = check_and_update_error_tables();
 
         if (fw_update) {
-            // Kullanıcıdan web arayüzüyle onay alınabilir
             updateSettings.last_checked_fw_version = latestFwInfo.version;
             updateSettings.save();
         }
-        if (models_update) {
-            // Bilgilendirme mesajı gösterilebilir
+        if (models_update || tables_update) {
+            // Dilerseniz kullanıcıya bilgi verin
         }
     }
 
@@ -54,5 +52,5 @@ void setup() {
 }
 
 void loop() {
-    // Ana uygulama döngüsü (gerekirse test/monitor fonksiyonları)
+    // ...
 }
