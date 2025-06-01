@@ -10,7 +10,6 @@ public:
     String file_path;
     ErrorTable(String path) : file_path(path) {}
 
-    // Yükle (SPIFFS üzerinden)
     void load() {
         entries.clear();
         File f = SPIFFS.open(file_path, "r");
@@ -23,12 +22,10 @@ public:
         }
         f.close();
     }
-    // Hata kodu açıklaması
     String description(uint16_t code) {
         for (auto& e : entries) if (e.code == code) return e.description;
         return "Bilinmeyen arıza kodu";
     }
 };
 
-// Markaya göre global objeler
 extern ErrorTable vaillantTable, demirdokumTable, ecaTable, boschTable;
