@@ -34,7 +34,6 @@ String diag_read_errors_json(DiagBrand brand) {
 }
 
 void diag_reset_error(DiagBrand brand) {
-    uint8_t reset_cmd[8] = {0xAA, 0x00, 0x10, 0x05, 0x01, 0x00, 0x01, 0x0D}; // örnek frame
-    // Bosch protokolü farklıysa burada ayrıştırabilirsin
+    uint8_t reset_cmd[8] = {0xAA, 0x00, 0x10, 0x05, 0x01, 0x00, 0x01, 0x0D};
     DiagSerial.write(reset_cmd, sizeof(reset_cmd));
 }
