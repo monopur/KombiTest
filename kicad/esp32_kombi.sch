@@ -32,4 +32,24 @@ F 3 "" H 4500 1800 50  0001 C CNN
 	1    0    0    -1
 $EndComp
 # Buraya diğer bileşenler (ör: röle, MOSFET, dijital pot, encoder, ACS712, vs.) eklenir.
+# ... diğer netler ve bileşenler ...
+$Comp
+L TestPoint TP_BOSCH_RX
+U 1 1 60C6A011
+P 9000 3200
+F 0 "TP_BOSCH_RX" V 9000 3350 50  0000 C CNN
+F 1 "BOSCH_RX" H 9000 3200 50  0000 C CNN
+	1    9000 3200
+	1    0    0    -1
+$EndComp
+$Comp
+L TestPoint TP_BOSCH_TX
+U 1 1 60C6A012
+P 9000 3400
+F 0 "TP_BOSCH_TX" V 9000 3550 50  0000 C CNN
+F 1 "BOSCH_TX" H 9000 3400 50  0000 C CNN
+	1    9000 3400
+	1    0    0    -1
+$EndComp
+# ... bağlantılar, netler ...
 $EndSCHEMATC
