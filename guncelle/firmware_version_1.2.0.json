@@ -1,0 +1,7 @@
+{
+  "version": "1.2.0",
+  "release_date": "2025-06-01",
+  "hw_compat": ["2.1", "2.0"],
+  "notes": "Donanım 2.1 ve 2.0 ile uyumlu. \n- Diagnostik test ve reset menüsü geliştirildi.\n- Model dosyası otomatik senkronizasyonu eklendi.\n- Güncelleme tercihleri menüden yönetilebilir.",
+  "download_url": "https://github.com/monopur/KombiTest/releases/download/v1.2.0/kombitest_firmware_v1.2.0.bin"
+}

@@ -1,0 +1,7 @@
+KombiTest v1.2.0 Güncelleme Notları
+
+- Donanım 2.1 ve 2.0 ile tam uyumlu.
+- Diagnostik test ve reset menüsü geliştirildi.
+- Model dosyası otomatik senkronizasyonu eklendi.
+- Güncelleme tercihleri menüden yönetilebilir.
+- Küçük hata düzeltmeleri ve performans iyileştirmeleri.

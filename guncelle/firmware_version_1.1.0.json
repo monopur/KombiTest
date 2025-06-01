@@ -1,0 +1,7 @@
+{
+  "version": "1.1.0",
+  "release_date": "2025-05-01",
+  "hw_compat": ["2.0", "1.9"],
+  "notes": "Donanım 2.0 ve 1.9 ile uyumlu. \n- Temel diagnostik test desteği.\n- Web arayüzü güncellemesi.",
+  "download_url": "https://github.com/monopur/KombiTest/releases/download/v1.1.0/kombitest_firmware_v1.1.0.bin"
+}
