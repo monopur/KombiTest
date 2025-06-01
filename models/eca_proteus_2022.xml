@@ -1,0 +1,26 @@
+<model>
+  <name>ECA_Proteus_2022</name>
+  <description>ECA yoğuşmalı, 3 NTC, PWM fan, modülasyonlu gaz valfi, iyonizasyon, dijital basınç sensörü</description>
+  <inputs>
+    <input id="ntc1" type="ntc" label="NTC1 Kazan" ohm="10000"/>
+    <input id="ntc2" type="ntc" label="NTC2 Dönüş" ohm="15000"/>
+    <input id="ntc3" type="ntc" label="NTC3 Sıcak Su" ohm="10000"/>
+    <input id="pressure" type="analog" label="Dijital Basınç Sensörü"/>
+    <input id="ion" type="digital" label="Alev Elektrodu"/>
+    <input id="fan_rpm" type="pulse" label="Fan Devir Sensörü"/>
+  </inputs>
+  <outputs>
+    <output id="relay_pump" type="relay" label="Pompa Rölesi"/>
+    <output id="relay_valve" type="relay" label="Gaz Valfi Rölesi"/>
+    <output id="fan_pwm" type="pwm" label="Fan PWM"/>
+    <output id="gas_pwm" type="pwm" label="Gaz Valfi PWM"/>
+  </outputs>
+  <parameters>
+    <parameter key="fan_pwm_min" value="500" desc="Fan PWM minimum"/>
+    <parameter key="fan_pwm_max" value="2200" desc="Fan PWM maksimum"/>
+    <parameter key="gaz_pwm_min" value="10" desc="Gaz PWM min"/>
+    <parameter key="gaz_pwm_max" value="255" desc="Gaz PWM max"/>
+    <parameter key="pressure_adc_zero" value="320" desc="Basınç sensörü sıfır noktası"/>
+    <parameter key="pressure_adc_full" value="1720" desc="Basınç sensörü maksimum"/>
+  </parameters>
+</model>

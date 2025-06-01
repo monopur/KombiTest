@@ -1,0 +1,19 @@
+{
+  "model": {
+    "name": "Baymak_Luna_2016",
+    "description": "Baymak yoğuşmasız, 2 NTC, 2 röle çıkışı, basınç şalteri, iyonizasyon",
+    "inputs": [
+      {"id": "ntc1", "type": "ntc", "label": "NTC1 Kazan", "ohm": 10000},
+      {"id": "ntc2", "type": "ntc", "label": "NTC2 Sıcak Su", "ohm": 15000},
+      {"id": "pressure_sw", "type": "digital", "label": "Basınç Şalteri"},
+      {"id": "ion", "type": "digital", "label": "Alev Elektrodu"}
+    ],
+    "outputs": [
+      {"id": "relay_pump", "type": "relay", "label": "Pompa Rölesi"},
+      {"id": "relay_valve", "type": "relay", "label": "Gaz Valfi Rölesi"}
+    ],
+    "parameters": [
+      {"key": "ion_sense_level", "value": 1, "desc": "İyonizasyon algılama seviyesi"}
+    ]
+  }
+}

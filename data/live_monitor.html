@@ -1,0 +1,42 @@
+<!--
+  live_monitor.html: Kombi kartı canlı izleme ve otomatik test başlatma arayüzü.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Kombi Kartı Canlı İzleme ve Test</title>
+  <style>body { font-family: Arial; } .ok { color:green; } .fail { color: red; }</style>
+</head>
+<body>
+  <h2>Canlı Değerler</h2>
+  <div id="live"></div>
+  <button onclick="runTest()">Test Başlat</button>
+  <pre id="testlog"></pre>
+  <script>
+    async function updateLive() {
+      const r = await fetch('/api/live_values');
+      const data = await r.json();
+      let html = "<b>Girişler</b><ul>";
+      data.inputs.forEach(i=>{
+        html += `<li>${i.label}: <b>${i.value}</b></li>`;
+      });
+      html += "</ul><b>Çıkışlar</b><ul>";
+      data.outputs.forEach(o=>{
+        html += `<li>${o.label}: <b>${o.value}</b></li>`;
+      });
+      html += "</ul>";
+      document.getElementById('live').innerHTML = html;
+    }
+    async function runTest() {
+      document.getElementById('testlog').textContent = "Test başlatılıyor...";
+      const r = await fetch('/api/run_test', {method:"POST"});
+      const data = await r.json();
+      document.getElementById('testlog').textContent = data.log;
+      updateLive();
+    }
+    setInterval(updateLive, 2000);
+    updateLive();
+  </script>
+</body>
+</html>

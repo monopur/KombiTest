@@ -1,0 +1,94 @@
+<!--
+  model_editor.html: Kombi model dosyasını (JSON/XML) web üzerinden canlı düzenleme arayüzü.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kombi Model Düzenleyici</title>
+  <meta charset="utf-8" />
+  <style>
+    input[type="text"] { width: 180px; }
+    .block { border:1px solid #aaa; margin:8px; padding:8px; }
+    button { margin:4px; }
+  </style>
+</head>
+<body>
+  <h2>Aktif Kombi Modeli</h2>
+  <div id="model-form"></div>
+  <button onclick="saveModel()">Kaydet</button>
+  <button onclick="fetchModel()">Yenile</button>
+  <button onclick="addInput()">Giriş Ekle</button>
+  <button onclick="addOutput()">Çıkış Ekle</button>
+  <button onclick="addParam()">Parametre Ekle</button>
+  <hr>
+  <h4>Model Dosyası Yükle (.json/.xml):</h4>
+  <input type="file" id="fileInput" />
+  <button onclick="uploadFile()">Yükle</button>
+  <script>
+    let model = {};
+    async function fetchModel() {
+      const r = await fetch("/api/model_settings");
+      model = await r.json();
+      renderForm();
+    }
+    function renderForm() {
+      let html = `<b>${model.model.name}</b> <input type="text" value="${model.model.name}" onchange="model.model.name=this.value"><br>`;
+      html += `<i>${model.model.description}</i> <input type="text" value="${model.model.description}" onchange="model.model.description=this.value"><hr>`;
+      html += "<div><b>Girişler</b>";
+      model.model.inputs.forEach((i,idx) => {
+        html += `<div class="block">
+          <input type="text" placeholder="id" value="${i.id}" onchange="model.model.inputs[${idx}].id=this.value">
+          <input type="text" placeholder="type" value="${i.type}" onchange="model.model.inputs[${idx}].type=this.value">
+          <input type="text" placeholder="label" value="${i.label}" onchange="model.model.inputs[${idx}].label=this.value">
+          <input type="number" placeholder="ohm" value="${i.ohm||''}" onchange="model.model.inputs[${idx}].ohm=Number(this.value)">
+          <button onclick="removeInput(${idx})">Sil</button>
+        </div>`;
+      });
+      html += "</div><div><b>Çıkışlar</b>";
+      model.model.outputs.forEach((o,idx) => {
+        html += `<div class="block">
+          <input type="text" placeholder="id" value="${o.id}" onchange="model.model.outputs[${idx}].id=this.value">
+          <input type="text" placeholder="type" value="${o.type}" onchange="model.model.outputs[${idx}].type=this.value">
+          <input type="text" placeholder="label" value="${o.label}" onchange="model.model.outputs[${idx}].label=this.value">
+          <button onclick="removeOutput(${idx})">Sil</button>
+        </div>`;
+      });
+      html += "</div><div><b>Parametreler</b>";
+      model.model.parameters.forEach((p,idx) => {
+        html += `<div class="block">
+          <input type="text" placeholder="key" value="${p.key}" onchange="model.model.parameters[${idx}].key=this.value">
+          <input type="text" placeholder="value" value="${p.value}" onchange="model.model.parameters[${idx}].value=this.value">
+          <input type="text" placeholder="desc" value="${p.desc}" onchange="model.model.parameters[${idx}].desc=this.value">
+          <button onclick="removeParam(${idx})">Sil</button>
+        </div>`;
+      });
+      html += "</div>";
+      document.getElementById("model-form").innerHTML = html;
+    }
+    function addInput() { model.model.inputs.push({id:"",type:"",label:""}); renderForm(); }
+    function addOutput() { model.model.outputs.push({id:"",type:"",label:""}); renderForm(); }
+    function addParam() { model.model.parameters.push({key:"",value:"",desc:""}); renderForm(); }
+    function removeInput(idx) { model.model.inputs.splice(idx,1); renderForm(); }
+    function removeOutput(idx) { model.model.outputs.splice(idx,1); renderForm(); }
+    function removeParam(idx) { model.model.parameters.splice(idx,1); renderForm(); }
+    async function saveModel() {
+      await fetch("/api/model_settings", {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(model)
+      });
+      alert("Kaydedildi!");
+    }
+    async function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      if (!fileInput.files.length) return alert("Dosya seçin!");
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      await fetch("/api/upload_model", {method:"POST",body:formData});
+      alert("Model yüklendi!");
+      fetchModel();
+    }
+    fetchModel();
+  </script>
+</body>
+</html>
