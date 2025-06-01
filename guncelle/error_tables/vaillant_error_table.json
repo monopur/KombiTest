@@ -1,0 +1,10 @@
+{
+  "errors": [
+    { "code": 3874, "description": "F.22 – Su eksikliği" },
+    { "code": 3875, "description": "F.23 – Sirkülasyon düşük" },
+    { "code": 3876, "description": "F.24 – Aşırı ısınma" },
+    { "code": 3880, "description": "F.28 – Ateşleme yok" },
+    { "code": 3881, "description": "F.29 – Alev kaybı" },
+    { "code": 65535, "description": "Bilinmeyen arıza kodu" }
+  ]
+}
