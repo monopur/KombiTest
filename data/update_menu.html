@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Güncelleme Ayarları</title>
+  <meta charset="utf-8"/>
+</head>
+<body>
+  <h2>Güncelleme Ayarları</h2>
+  <input type="checkbox" id="auto_update" onchange="setUpdatePref()"> Otomatik güncellemeyi aktif et
+  <div id="update_status"></div>
+  <script>
+    async function setUpdatePref() {
+      let enabled = document.getElementById('auto_update').checked;
+      await fetch('/api/update_pref', {
+        method: "POST", body: "enabled=" + enabled,
+        headers: {"Content-Type":"application/x-www-form-urlencoded"}
+      });
+    }
+    async function checkUpdateStatus() {
+      const r = await fetch('/api/update_status');
+      const d = await r.json();
+      if(d.update_available) {
+        document.getElementById('update_status').innerHTML =
+          `<b>Yeni uyumlu yazılım var (${d.version})</b><br>${d.notes}<br>
+          <a href="${d.download_url}" target="_blank">Güncellemeyi indir</a>`;
+      }
+    }
+    checkUpdateStatus();
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Diagnostik</title>
+</head>
+<body>
+  <h2>Kombi Diagnostik</h2>
+  <label>Marka: 
+    <select id="brand">
+      <option value="vaillant">Vaillant</option>
+      <option value="demirdokum">Demirdöküm</option>
+      <option value="eca">E.C.A.</option>
+    </select>
+  </label>
+  <button onclick="startDiag()">Test (Hata Oku)</button>
+  <button onclick="resetDiag()">Reset</button>
+  <ul id="errlist"></ul>
+  <script>
+    async function startDiag() {
+      let brand = document.getElementById('brand').value;
+      const r = await fetch(`/api/diag?brand=${brand}`);
+      const data = await r.json();
+      let html = "";
+      data.errors.forEach(e => {
+        html += `<li>Kod: ${e.code.toUpperCase()} – ${e.desc}</li>`;
+      });
+      document.getElementById('errlist').innerHTML = html;
+    }
+    async function resetDiag() {
+      let brand = document.getElementById('brand').value;
+      await fetch(`/api/diag_reset?brand=${brand}`, {method: "POST"});
+      alert("Reset komutu gönderildi!");
+    }
+  </script>
+</body>
+</html>
