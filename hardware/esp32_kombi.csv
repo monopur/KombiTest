@@ -1,0 +1,25 @@
+Fonksiyon,ESP32 Pin,Harici Donanım,Açıklama
+I2C SDA,21,OLED SDA / Touch SDA,I2C ortak hat
+I2C SCL,22,OLED SCL / Touch SCL,I2C ortak hat
+Encoder A,32,Encoder A,GPIO
+Encoder B,33,Encoder B,GPIO
+Encoder Button,25,Encoder SW,GPIO
+NTC1 CS,5,MCP41xxx NTC1 CS,SPI CS
+NTC2 CS,18,MCP41xxx NTC2 CS,SPI CS
+NTC3 CS,19,MCP41xxx NTC3 CS,SPI CS
+SPI MOSI,23,MCP41xxx SI,SPI
+SPI SCK,18,MCP41xxx SCK,SPI
+SPI MISO,19,MCP41xxx SO,SPI (opsiyonel)
+Röle Fan,26,Röle IN1,Optokuplörlü
+Röle Vana,27,Röle IN2,Optokuplörlü
+Röle Pompa,14,Röle IN3,Optokuplörlü
+Akım Ölçer Fan,34,ACS712 OUT,ADC
+Akım Ölçer Vana,35,ACS712 OUT,ADC
+Akım Ölçer Pompa,36,ACS712 OUT,ADC
+PWM Fan,4,MOSFET Gate (Fan),PWM çıkışı
+Türbin Sim.,13,Türbin pals çıkışı,GPIO pulse out
+Basınç Şalteri,39,Basınç sensörü/şalter,ADC veya dijital giriş
+Alev Elektrodu Sim.,12,Röle/MOSFET çıkışı,GPIO
+GND,GND,Tüm GND,Ortak toprak
+3V3,3.3V,Tüm 3.3V modüller,Regüle çıkışı
+5V,5V,Röle, OLED, Touch, MCP41xxx,USB veya step-down
