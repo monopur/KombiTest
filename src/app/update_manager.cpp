@@ -1,8 +1,6 @@
-// ... Diğer kodlar aynı kalır ...
-
+// ... diğer kodlar ...
 #define ERROR_TABLES_API_LIST "https://api.github.com/repos/monopur/KombiTest/contents/guncelle/error_tables"
 
-// Hata tablosu güncelleme (tüm markalar için)
 bool check_and_update_error_tables() {
     HTTPClient http;
     http.begin(ERROR_TABLES_API_LIST);
@@ -28,7 +26,6 @@ bool check_and_update_error_tables() {
             fh.end();
         }
     }
-    // Yeniden yükle
     vaillantTable.load();
     demirdokumTable.load();
     ecaTable.load();
