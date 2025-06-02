@@ -14,6 +14,7 @@ void setup() {
     SPIFFS.begin(true);
     updateSettings.load();
 
+    // Güncelleme kontrolü
     if (updateSettings.auto_update) {
         bool fw_update = check_firmware_update();
         bool models_update = check_and_update_models();
@@ -23,6 +24,7 @@ void setup() {
             updateSettings.last_checked_fw_version = latestFwInfo.version;
             updateSettings.save();
         }
+        // Model ve hata tabloları otomatik güncellenir, onay gerekmez
     }
 
     server.on("/api/update_pref", HTTP_POST, [](AsyncWebServerRequest *request){
