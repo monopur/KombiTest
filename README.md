@@ -156,5 +156,43 @@ C: Model XML’i ve hata tablosu JSON’u ekleyin, yazılımda ilgili marka içi
 
 MIT Lisansı ile özgürce kullanabilirsiniz.  
 Yardım ve katkı için GitHub Issues veya Pull Request açabilirsiniz.
+# KombiTest Otomatik Güncelleme Sistemi
 
+## Özellikler
+- Tüm marka hata kodu, test ve reset desteği (Vaillant, Demirdöküm, E.C.A., Bosch)
+- **Firmware güncellemesi için kullanıcı onayı**
+- **Model dosyası ve hata tabloları otomatik güncellenir**
+- Tüm modeller ve hata tabloları artık `guncelle/models/` ve `guncelle/error_tables/` dizinlerinde tutulur
+
+## Dizin Yapısı
+```text
+src/
+guncelle/
+  firmware_version_1.2.0.json
+  firmware_version_1.1.0.json
+  firmware_version_1.0.0.json
+  release_notes_1.2.0.txt
+  models/
+    vaillant_ecotecplus_2024.xml
+    demirdokum_neo_2023.xml
+    eca_proteus_2022.xml
+    bosch_condens_2025.xml
+  error_tables/
+    vaillant_error_table.json
+    demirdokum_error_table.json
+    eca_error_table.json
+    bosch_error_table.json
+data/
+  diagnostic_menu.html
+  update_menu.html
+```
+
+## Kullanım
+1. Firmware güncellemesi için web arayüzünden onay alınır.
+2. Model dosyaları ve hata tabloları internete bağlıysa Github'dan otomatik güncellenir.
+3. İlk yüklemede `/data` klasörünü SPIFFS/LittleFS ile cihaza yüklemeyi unutmayın.
+
+## Not
+- Otomatik güncellenen dosyalar: `guncelle/models/` (model dosyaları), `guncelle/error_tables/` (hata tabloları)
+- Firmware için her zaman kullanıcı onayı alınır.
 ---
