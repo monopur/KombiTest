@@ -1,14 +1,14 @@
 <model>
-  <name>Vaillant_EcoTecPlus_2024</name>
-  <description>Vaillant yoğuşmalı, 3 NTC, PWM fan, modülasyonlu gaz valfi, yoğuşma sensörü, modbus, iyonizasyon</description>
+  <name>Baymak_Duotec_2021</name>
+  <description>Baymak yoğuşmalı, 3 NTC, PWM fan, modülasyonlu gaz valfi, yoğuşma sensörü, iyonizasyon, dijital basınç sensörü</description>
   <inputs>
     <input id="ntc1" type="ntc" label="NTC1 Kazan" ohm="10000"/>
     <input id="ntc2" type="ntc" label="NTC2 Dönüş" ohm="15000"/>
     <input id="ntc3" type="ntc" label="NTC3 Sıcak Su" ohm="10000"/>
+    <input id="pressure" type="analog" label="Dijital Basınç Sensörü"/>
     <input id="condensate" type="digital" label="Yoğuşma Sensörü"/>
-    <input id="ion" type="digital" label="Alev Elektrodu"/>
-    <input id="modbus" type="bus" label="Modbus Adresi"/>
     <input id="fan_rpm" type="pulse" label="Fan Devir Sensörü"/>
+    <input id="ion" type="digital" label="Alev Elektrodu"/>
   </inputs>
   <outputs>
     <output id="relay_pump" type="relay" label="Pompa Rölesi"/>
@@ -18,9 +18,10 @@
   </outputs>
   <parameters>
     <parameter key="fan_pwm_min" value="420" desc="Fan PWM minimum"/>
-    <parameter key="fan_pwm_max" value="2300" desc="Fan PWM maksimum"/>
-    <parameter key="gaz_pwm_min" value="12" desc="Gaz PWM min"/>
+    <parameter key="fan_pwm_max" value="2200" desc="Fan PWM maksimum"/>
+    <parameter key="gaz_pwm_min" value="15" desc="Gaz PWM min"/>
     <parameter key="gaz_pwm_max" value="255" desc="Gaz PWM max"/>
-    <parameter key="modbus_addr" value="1" desc="Modbus adresi"/>
+    <parameter key="pressure_adc_zero" value="350" desc="Basınç sensörü sıfır noktası"/>
+    <parameter key="pressure_adc_full" value="1800" desc="Basınç sensörü maksimum"/>
   </parameters>
 </model>

@@ -1,0 +1,27 @@
+{
+  "model": {
+    "name": "Daikin_Premix_2024",
+    "description": "Daikin yoğuşmalı, 3 NTC, PWM fan, modülasyonlu gaz valfi, yoğuşma sensörü, iyonizasyon",
+    "inputs": [
+      {"id": "ntc1", "type": "ntc", "label": "NTC1 Kazan", "ohm": 10000},
+      {"id": "ntc2", "type": "ntc", "label": "NTC2 Plaka Eşanjör", "ohm": 10000},
+      {"id": "ntc3", "type": "ntc", "label": "NTC3 Dönüş", "ohm": 10000},
+      {"id": "condensate", "type": "digital", "label": "Yoğuşma Sensörü"},
+      {"id": "ion", "type": "digital", "label": "Alev Elektrodu"},
+      {"id": "fan_rpm", "type": "pulse", "label": "Fan Devir Sensörü"}
+    ],
+    "outputs": [
+      {"id": "relay_pump", "type": "relay", "label": "Pompa Rölesi"},
+      {"id": "relay_valve", "type": "relay", "label": "Gaz Valfi Rölesi"},
+      {"id": "fan_pwm", "type": "pwm", "label": "Fan PWM"},
+      {"id": "gas_pwm", "type": "pwm", "label": "Gaz Valfi PWM"}
+    ],
+    "parameters": [
+      {"key": "fan_pwm_min", "value": 410, "desc": "Fan PWM minimum"},
+      {"key": "fan_pwm_max", "value": 2300, "desc": "Fan PWM maksimum"},
+      {"key": "gaz_pwm_min", "value": 10, "desc": "Gaz PWM min"},
+      {"key": "gaz_pwm_max", "value": 255, "desc": "Gaz PWM max"},
+      {"key": "ion_sense_level", "value": 1, "desc": "İyonizasyon algılama seviyesi"}
+    ]
+  }
+}
